@@ -66,7 +66,7 @@ class Heroku::Command::Certs < Heroku::Command::Base
   #
   # Add an ssl endpoint to an app.
   #
-  #   --bypass  # bypass the trust chain completion step
+  #   --bypass                 # bypass the trust chain completion step
   #
   def add
     crt, key = read_crt_and_key
@@ -83,7 +83,8 @@ class Heroku::Command::Certs < Heroku::Command::Base
   #
   # Update an SSL Endpoint on an app.
   #
-  #   --bypass  # bypass the trust chain completion step
+  #   --bypass                 # bypass the trust chain completion step
+  #   -e, --endpoint ENDPOINT  # name of the endpoint to update
   #
   def update
     crt, key = read_crt_and_key
@@ -100,6 +101,8 @@ class Heroku::Command::Certs < Heroku::Command::Base
   #
   # Show certificate information for an ssl endpoint.
   #
+  #   -e, --endpoint ENDPOINT  # name of the endpoint to check info on
+  #
   def info
     cname = options[:endpoint] || current_endpoint
     endpoint = action("Fetching SSL Endpoint #{cname} info for #{app}") do
@@ -114,6 +117,8 @@ class Heroku::Command::Certs < Heroku::Command::Base
   #
   # Remove an SSL Endpoint from an app.
   #
+  #   -e, --endpoint ENDPOINT  # name of the endpoint to remove
+  #
   def remove
     cname = options[:endpoint] || current_endpoint
     action("Removing SSL Endpoint #{cname} from #{app}") do
@@ -125,6 +130,8 @@ class Heroku::Command::Certs < Heroku::Command::Base
   # certs:rollback
   #
   # Rollback an SSL Endpoint for an app.
+  #
+  #   -e, --endpoint ENDPOINT  # name of the endpoint to rollback
   #
   def rollback
     cname = options[:endpoint] || current_endpoint
